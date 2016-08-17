@@ -3,6 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author usamaalanbari
+ *
+ */
 public class FlightsList {
 	
 	private Flight [] flightList = {
@@ -33,11 +38,7 @@ public class FlightsList {
 			new Flight("MAD","CDG","IB6112",112),
 			new Flight("MAD","LHR","TK4199",186),
 			new Flight("MAD","CDG","IB7403",253)
-			};
-	
-
-
-	                              
+			};                           
 	       
 
 	public Flight [] getFlightList() {
@@ -48,6 +49,12 @@ public class FlightsList {
 		this.flightList = flightList;
 	}
 
+	/**
+	 * 
+	 * @param origin
+	 * @param destination
+	 * @return
+	 */
 	public List<Flight> getFlightListByOriginAndDestination(String origin, String destination) {
 		List<Flight> filterFlights = new ArrayList<Flight>();
 		int length = this.flightList.length;

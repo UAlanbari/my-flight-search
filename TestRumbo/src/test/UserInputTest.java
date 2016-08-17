@@ -13,7 +13,7 @@ public class UserInputTest {
 	public void testCreateUserInputDateDeparture() {
 		Passengers passengers = new Passengers(2,1,1);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String dateInString = "7-08-2016";
+        String dateInString = "7-08-2013";
 
         try {
 
@@ -24,7 +24,6 @@ public class UserInputTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
 //		UserInput userInput = new UserInput("Origin", "Dest",1471339390892L , passengers);
 //		assertEquals(1471339390892L,userInput.getDateOfDeparture());
 

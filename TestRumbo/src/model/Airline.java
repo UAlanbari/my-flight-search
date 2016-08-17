@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * 
+ * @author usamaalanbari
+ *
+ */
 public class Airline {
 
 	private String iataCode;

@@ -1,16 +1,25 @@
+package businneslogic;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import model.Flight;
 import model.FlightsList;
 import model.UserInput;
 import model.UserOutput;
 
+/**
+ * 
+ * @author usamaalanbari
+ *
+ */
 public class PriceCalculator {
 	
+	/**
+	 * 
+	 * @param userInput
+	 * @return
+	 */
 	public List<UserOutput> calculateUserPrice(UserInput userInput) {
 		List<UserOutput> listFlightsWithPrice = new ArrayList<UserOutput>();
 		FlightsList flighLists = new FlightsList();
@@ -25,7 +34,7 @@ public class PriceCalculator {
 			Flight element = flightByOriginAndDestination.get(i);
 			UserOutput userOutput = new UserOutput();
 			float adultsPrice = this.getAdultPrices(userInput, element.getPrice());
-			float childsPrice = this.getChildPrices(userInput);
+			float childsPrice = this.getChildPrices(userInput, element.getPrice());
 			float infantsPrice = this.getInfanctPrices(userInput, element.getPrice());
 			float totalPrice = adultsPrice + childsPrice + infantsPrice;
 			userOutput.setFlightCode(element.getAirline());
@@ -36,19 +45,34 @@ public class PriceCalculator {
 		return listFlightsWithPrice;
 	}
 
+	/**
+	 * 
+	 * @param userInput
+	 * @param flightPrice
+	 * @return
+	 */
 	private float getInfanctPrices(UserInput userInput, float flightPrice) {
-		float adultPrice = 0;
-//		double percentage = this.getUserPercentage();
-		return adultPrice * flightPrice;
+		return userInput.getPassengers().getNumberOfInfants() * flightPrice;
 	}
 
 
-	private float getChildPrices(UserInput userInput) {
-//		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
-//		return (float) (percentage * flightPrice) ;
-		return 0;
+	/**
+	 * 
+	 * @param userInput
+	 * @param flightPrice
+	 * @return
+	 */
+	private float getChildPrices(UserInput userInput, float flightPrice) {
+		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
+		return (float) (userInput.getPassengers().getNumberOfChilds() * (0.3 * (percentage * flightPrice))) ;
 	}
 
+	/**
+	 * 
+	 * @param userInput
+	 * @param flightPrice
+	 * @return
+	 */
 	private float getAdultPrices(UserInput userInput, float flightPrice) {
 		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
 		return (float) (userInput.getPassengers().getNumberOfAdults() *
@@ -56,6 +80,11 @@ public class PriceCalculator {
 
 	}
 	
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
 	private Double getUserPercentage(Date date) {
 		Double percentage = 0.0;
 		Date today = new Date();

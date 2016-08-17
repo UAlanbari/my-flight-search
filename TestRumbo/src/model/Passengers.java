@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * 
+ * @author usamaalanbari
+ *
+ */
 public class Passengers {
 	
 	private int numberOfAdults;
