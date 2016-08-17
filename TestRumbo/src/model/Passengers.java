@@ -1,9 +1,16 @@
+package model;
 
 public class Passengers {
 	
 	private int numberOfAdults;
 	private int numberOfChilds;
 	private int numberOfInfants;
+	
+	public Passengers(int numberOfAdults, int numberOfChilds, int numberOfInfants) {
+		this.numberOfAdults = numberOfAdults;
+		this.numberOfChilds = numberOfChilds;
+		this.numberOfInfants = numberOfInfants;
+	}
 	
 	public int getNumberOfAdults() {
 		return numberOfAdults;
@@ -22,6 +29,10 @@ public class Passengers {
 	}
 	public void setNumberOfInfants(int numberOfInfants) {
 		this.numberOfInfants = numberOfInfants;
+	}
+	
+	public int sumTotalPassengers(){
+		return this.numberOfAdults + this.numberOfChilds + this.numberOfInfants;
 	}
 
 }

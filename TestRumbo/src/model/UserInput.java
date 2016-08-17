@@ -1,3 +1,7 @@
+package model;
+
+import java.util.Date;
+
 /**
  * 
  * @author usamaalanbari
@@ -7,10 +11,10 @@ public class UserInput {
 	
 	private String origin;
 	private String destination;
-	private Float dateOfDeparture;
+	private Date dateOfDeparture;
 	private Passengers passengers;
 	
-	public UserInput(String origin, String destination, Float dateOfDeparture, Passengers passengers){
+	public UserInput(String origin, String destination, Date dateOfDeparture, Passengers passengers){
 		this.origin = origin;
 		this.destination = destination;
 		this.dateOfDeparture = dateOfDeparture;
@@ -29,10 +33,10 @@ public class UserInput {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public Float getDateOfDeparture() {
+	public Date getDateOfDeparture() {
 		return dateOfDeparture;
 	}
-	public void setDateOfDeparture(Float dateOfDeparture) {
+	public void setDateOfDeparture(Date dateOfDeparture) {
 		this.dateOfDeparture = dateOfDeparture;
 	}
 	public Passengers getPassengers() {
@@ -40,6 +44,10 @@ public class UserInput {
 	}
 	public void setPassengers(Passengers passengers) {
 		this.passengers = passengers;
+	}
+	
+	public int getTotalPassengers(){
+		return this.passengers.sumTotalPassengers();
 	}
 	
 	
