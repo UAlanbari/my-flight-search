@@ -32,7 +32,7 @@ public class PriceCalculator {
 			UserOutput userOutput = new UserOutput();
 			float adultsPrice = this.getAdultPrices(userInput, element.getPrice());
 			float childsPrice = this.getChildPrices(userInput, element.getPrice());
-			float infantsPrice = (float) this.getInfanctPrices(userInput, element.getAirline().substring(0, 1));
+			float infantsPrice = (float) this.getInfanctPrices(userInput, element.getAirline().substring(0, 2));
 			float totalPrice = adultsPrice + childsPrice + infantsPrice;
 			userOutput.setFlightCode(element.getAirline());
 			userOutput.setFlightPrice(totalPrice);
@@ -48,7 +48,7 @@ public class PriceCalculator {
 	 * @param flightPrice
 	 * @return
 	 */
-	private double getInfanctPrices(UserInput userInput, String flightCode) {
+	public double getInfanctPrices(UserInput userInput, String flightCode) {
 		AirlineList airlineList = new AirlineList();
 		return userInput.getPassengers().getNumberOfInfants() * airlineList.getAirlineByCode(flightCode).getInfantPrice();
 	}
@@ -60,7 +60,7 @@ public class PriceCalculator {
 	 * @param flightPrice
 	 * @return
 	 */
-	private float getChildPrices(UserInput userInput, float flightPrice) {
+	public float getChildPrices(UserInput userInput, float flightPrice) {
 		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
 		return (float) (userInput.getPassengers().getNumberOfChilds() * (0.33 * (percentage * flightPrice))) ;
 	}
@@ -71,7 +71,7 @@ public class PriceCalculator {
 	 * @param flightPrice
 	 * @return
 	 */
-	private float getAdultPrices(UserInput userInput, float flightPrice) {
+	public float getAdultPrices(UserInput userInput, float flightPrice) {
 		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
 		return (float) (userInput.getPassengers().getNumberOfAdults() *
 						(percentage * flightPrice)) ;
@@ -83,18 +83,18 @@ public class PriceCalculator {
 	 * @param date
 	 * @return
 	 */
-	private Double getUserPercentage(Date date) {
-		Double percentage = 0.0;
+	public float getUserPercentage(Date date) {
+		float percentage = (float) 0.0;
 		Date today = new Date();
 		long daysBetween = TimeUnit.MILLISECONDS.toDays(today.getTime() - date.getTime());
 		if (daysBetween > 30) {
-			percentage = 0.8;
+			percentage = (float) 0.8;
 		} else if (daysBetween <= 30 && daysBetween >=16){
-			percentage = 1.0;
+			percentage = (float) 1.0;
 		} else if (daysBetween <= 15 && daysBetween >= 3) {
-			percentage = 1.2;
+			percentage = (float) 1.2;
 		} else {
-			percentage = 1.5;
+			percentage = (float) 1.5;
 		}
 		
 		return  percentage;
