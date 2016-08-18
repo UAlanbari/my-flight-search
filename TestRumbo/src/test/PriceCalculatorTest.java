@@ -18,9 +18,9 @@ public class PriceCalculatorTest {
 
 	@Test
 	public void test() {
-		Passengers passengers = new Passengers(2,1,0);
+		Passengers passengers = new Passengers(2,0,0);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String dateInString = "7-06-2016";
+        String dateInString = "7-08-2016";
         Date date = null;
         try {
             date = formatter.parse(dateInString);
@@ -30,9 +30,9 @@ public class PriceCalculatorTest {
         PriceCalculator priceCalculator = new PriceCalculator();
         UserInput userInput = new UserInput("AMS","CPH",date, passengers);
         List<UserOutput> output = priceCalculator.calculateUserPrice(userInput);
-        System.out.println((float)output.get(0).getFlightPrice());
         float delta = 0;
-        assertEquals(464,(output.get(0).getFlightPrice()), delta);
+        System.out.println(output.get(0).getFlightPrice());
+        assertEquals(715,(output.get(0).getFlightPrice()), delta);
        
 	}
 

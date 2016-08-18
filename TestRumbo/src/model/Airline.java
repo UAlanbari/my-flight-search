@@ -9,9 +9,9 @@ public class Airline {
 
 	private String iataCode;
 	private String name;
-	private float infantPrice;
+	private double infantPrice;
 	
-	public Airline(String iataCode, String name, float infantPrice){
+	public Airline(String iataCode, String name, double infantPrice){
 		this.iataCode = iataCode;
 		this.name = name;
 		this.infantPrice = infantPrice;
@@ -33,11 +33,11 @@ public class Airline {
 		this.name = name;
 	}
 
-	public float getInfantPrice() {
+	public double getInfantPrice() {
 		return infantPrice;
 	}
 
-	public void setInfantPrice(float infantPrice) {
+	public void setInfantPrice(double infantPrice) {
 		this.infantPrice = infantPrice;
 	}
 	

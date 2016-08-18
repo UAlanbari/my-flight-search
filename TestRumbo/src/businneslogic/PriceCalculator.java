@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import model.AirlineList;
 import model.Flight;
 import model.FlightsList;
 import model.UserInput;
@@ -23,11 +25,6 @@ public class PriceCalculator {
 	public List<UserOutput> calculateUserPrice(UserInput userInput) {
 		List<UserOutput> listFlightsWithPrice = new ArrayList<UserOutput>();
 		FlightsList flighLists = new FlightsList();
-		// Two kind of calculation prices
-		//1. Time reservation
-		//2. Type of passanger
-		// Entonces recorremos los tipos de pasajeros y vamos calculando un precio por cabeza y sumando al total
-		//obtengo un listado de vuelos ahora debo sacar para cada uno precio
 		List<Flight> flightByOriginAndDestination = flighLists.getFlightListByOriginAndDestination(userInput.getOrigin(),userInput.getDestination());
 		int length = flightByOriginAndDestination.size();
 		for (int i=0; i<length ;i++){
@@ -35,7 +32,7 @@ public class PriceCalculator {
 			UserOutput userOutput = new UserOutput();
 			float adultsPrice = this.getAdultPrices(userInput, element.getPrice());
 			float childsPrice = this.getChildPrices(userInput, element.getPrice());
-			float infantsPrice = this.getInfanctPrices(userInput, element.getPrice());
+			float infantsPrice = (float) this.getInfanctPrices(element.getAirline().substring(0, 1));
 			float totalPrice = adultsPrice + childsPrice + infantsPrice;
 			userOutput.setFlightCode(element.getAirline());
 			userOutput.setFlightPrice(totalPrice);
@@ -51,8 +48,9 @@ public class PriceCalculator {
 	 * @param flightPrice
 	 * @return
 	 */
-	private float getInfanctPrices(UserInput userInput, float flightPrice) {
-		return userInput.getPassengers().getNumberOfInfants() * flightPrice;
+	private double getInfanctPrices(String flightCode) {
+		AirlineList airlineList = new AirlineList();
+		return airlineList.getAirlineByCode(flightCode).getInfantPrice();
 	}
 
 
