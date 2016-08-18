@@ -15,7 +15,6 @@ public class UserOutput {
 	}
 
 	public UserOutput() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getFlightCode() {

@@ -32,7 +32,7 @@ public class PriceCalculator {
 			UserOutput userOutput = new UserOutput();
 			float adultsPrice = this.getAdultPrices(userInput, element.getPrice());
 			float childsPrice = this.getChildPrices(userInput, element.getPrice());
-			float infantsPrice = (float) this.getInfanctPrices(element.getAirline().substring(0, 1));
+			float infantsPrice = (float) this.getInfanctPrices(userInput, element.getAirline().substring(0, 1));
 			float totalPrice = adultsPrice + childsPrice + infantsPrice;
 			userOutput.setFlightCode(element.getAirline());
 			userOutput.setFlightPrice(totalPrice);
@@ -48,9 +48,9 @@ public class PriceCalculator {
 	 * @param flightPrice
 	 * @return
 	 */
-	private double getInfanctPrices(String flightCode) {
+	private double getInfanctPrices(UserInput userInput, String flightCode) {
 		AirlineList airlineList = new AirlineList();
-		return airlineList.getAirlineByCode(flightCode).getInfantPrice();
+		return userInput.getPassengers().getNumberOfInfants() * airlineList.getAirlineByCode(flightCode).getInfantPrice();
 	}
 
 
@@ -62,7 +62,7 @@ public class PriceCalculator {
 	 */
 	private float getChildPrices(UserInput userInput, float flightPrice) {
 		double percentage = this.getUserPercentage(userInput.getDateOfDeparture());
-		return (float) (userInput.getPassengers().getNumberOfChilds() * (0.3 * (percentage * flightPrice))) ;
+		return (float) (userInput.getPassengers().getNumberOfChilds() * (0.33 * (percentage * flightPrice))) ;
 	}
 
 	/**
